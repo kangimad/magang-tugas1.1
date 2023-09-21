@@ -183,6 +183,14 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Organization' => App\Models\Organization::class,
+        'Group' => App\Models\Group::class,
+        'Type' => App\Models\Type::class,
+        'Province' => App\Models\Province::class,
+        'Regency' => App\Models\Regency::class,
+        'District' => App\Models\District::class,
+        'VIllage' => App\Models\VIllage::class,
+        'User' => App\Models\User::class,
     ])->toArray(),
 
 ];

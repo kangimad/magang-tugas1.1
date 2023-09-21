@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
-<body class="bg-gray-300">
+<body class="bg-gray-200">
     <div class="w-screen">
         <header>
             @include('public.partials.header')

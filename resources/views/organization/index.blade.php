@@ -1,5 +1,5 @@
+{{-- @dd($organizations) --}}
 <x-app-layout>
-
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Organizations') }}
@@ -99,8 +99,8 @@
                                     <tr class="text-md">
                                         <td class="text-center">{{ $i++ }}</td>
                                         <td class="px-3 py-1">{{ $org->name }}</td>
-                                        <td class="px-3 py-1">{{ $org->group }}</td>
-                                        <td class="px-3 py-1">{{ $org->type }}</td>
+                                        <td class="px-3 py-1">{{ $org->group->name ?? 'Ra metu' }}</td>
+                                        <td class="px-3 py-1">{{ $org->type->name ?? 'Ra metu' }}</td>
                                         <td class="px-3 py-1">{{ $org->class }}</td>
                                         <td class="px-3 py-1">{{ $org->address }}</td>
                                         <td class="px-3 py-1">{{ $org->phone }}</td>

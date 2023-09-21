@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Village extends Model
 {
@@ -13,7 +14,7 @@ class Village extends Model
     protected $guarded = ['id'];
     public $timestamps = true;
 
-    public function organizations()
+    public function organization():HasMany
     {
         return $this->hasMany(Organization::class, 'regency_id');
     }

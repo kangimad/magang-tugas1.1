@@ -13,7 +13,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="flex-row mt-5 w-full px-5 py-4 bg-white rounded shadow">
-                    <form class="w-full" action="/user/organizations" method="post">
+                    <form class="w-full" action="/admin/organization" method="post">
                         @csrf
                         {{-- CODE, NAME --}}
                         <div class="flex flex-wrap mb-3 gap-y-3">
@@ -26,6 +26,19 @@
                                     id="code" name="code" type="text" placeholder="code (4 digit)"
                                     value="{{ old('code') }}">
                                 @error('code')
+                                    <div class="mt-2 text-xs text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="w-full hidden lg:w-1/3 px-3 mb-3 md:mb-0">
+                                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                    for="created_by">
+                                    Username
+                                </label>
+                                <input
+                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('code') ring-2 ring-red-600 @enderror"
+                                    id="created_by" name="created_by" type="text"
+                                    placeholder="{{ Auth::user()->name }}" value="{{ Auth::user()->id }}">
+                                @error('created_by')
                                     <div class="mt-2 text-xs text-red-600">{{ $message }}</div>
                                 @enderror
                             </div>

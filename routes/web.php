@@ -34,7 +34,7 @@ Route::middleware('auth')
     })
     ->controller(OrganizationController::class)->prefix('admin/organization')->group(function () {
         Route::get('/', 'index')->name('organization.all');
-        // Route::post('/', 'store')->name('organization.store');
+        Route::post('/', 'store')->name('organization.store');
         Route::get('/create', 'create')->name('organization.create');
         // Route::patch('/edit/{id}', 'edit')->name('organization.edit');
         // Route::delete('/delete/{id}', 'edit')->name('organization.destroy');

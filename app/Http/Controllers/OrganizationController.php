@@ -10,12 +10,13 @@ use App\Models\Province;
 use App\Models\Regency;
 use App\Models\District;
 use App\Models\Village;
+use App\Models\User;
 
 class OrganizationController extends Controller
 {
     public function index () {
         $organizations = Organization::query()
-            ->with(['groups', 'types', 'provinces', 'regencies', 'districts', 'villages'])
+            ->with(['group', 'type', 'province', 'regency', 'district', 'village'])
             // ->when($request->name, function ($query) use ($request) {
             //     return $query->where('name', 'like', '%' . $request->name . '%');
             // })
@@ -47,7 +48,32 @@ class OrganizationController extends Controller
             'provinces' => Province::all(),
             'regencies' => Regency::all(),
             'districts' => District::all(),
-            'villages' => Village::all()
+            'villages' => Village::all(),
+            'users' => User::all()
         ]);
+    }
+
+    public function store (Request $request) {
+        // dd('penambahan data berhasil', request()->all());
+
+        $validatedData = $request->validate([
+            'code' => 'required|unique:organizations|max:4',
+            'name' => 'required|max:255',
+            'group_id' => 'required',
+            'type_id' => 'required',
+            'class' => 'required',
+            'address' => 'required|max:255',
+            'phone' => 'required',
+            'province_id' => 'required',
+            'regency_id' => 'required',
+            'district_id' => 'required',
+            'village_id' => 'required',
+            'created_by' => 'required',
+        ]);
+
+        Organization::create($validatedData);
+
+        return redirect()->route('organization.all')->with('succcess', 'Data berhasil ditambahkan');
+
     }
 }

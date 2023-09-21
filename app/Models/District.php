@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Organization;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class District extends Model
 {
@@ -13,9 +15,9 @@ class District extends Model
     protected $guarded = ['id'];
     public $timestamps = true;
 
-    public function organizations()
+    public function organization(): HasMany
     {
-        return $this->hasMany(Organization::class, 'district_id');
+        return $this->hasMany(Organization::class, "district_id", "id");
     }
 
 }
