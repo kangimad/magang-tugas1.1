@@ -89,6 +89,7 @@
                                     <th class="text-md pb-2">Class</th>
                                     <th class="text-md pb-2">Address</th>
                                     <th class="text-md pb-2">Phone</th>
+                                    <th class="text-md pb-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="border-b border-gray-300">
@@ -104,6 +105,14 @@
                                         <td class="px-3 py-1">{{ $org->class }}</td>
                                         <td class="px-3 py-1">{{ $org->address }}</td>
                                         <td class="px-3 py-1">{{ $org->phone }}</td>
+                                        <td class="px-3 py-1 flex align-middle justify-center">
+                                            <a href="/admin/organization/find/{{ $org->id }}"
+                                                class="px-3 py-1 mx-1 bg-yellow-400 rounded hover:bg-yellow-600">
+                                                <i class="bi bi-display"></i></a>
+                                            <a href="/admin/organization/delete/{{ $org->id }}" id="btn-delete" onclick="delete()"
+                                                class="px-3 py-1 mx-1 bg-red-400 rounded hover:bg-red-600">
+                                                <i class="bi bi-trash"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

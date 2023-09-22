@@ -47,6 +47,6 @@ class User extends Authenticatable
 
     public function organization():HasMany
     {
-        return $this->hasMany(Organization::class, 'created_by');
+        return $this->hasMany(Organization::class, 'created_by', 'id');
     }
 }

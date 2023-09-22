@@ -20,6 +20,7 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('organization.all')" :active="request()->routeIs('organization.all') ||
                         request()->routeIs('organization.create') ||
+                        request()->routeIs('organization.find') ||
                         request()->routeIs('organization.edit')">
                         {{ __('Organizations') }}
                     </x-nav-link>

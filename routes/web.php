@@ -36,13 +36,16 @@ Route::middleware('auth')
         Route::get('/', 'index')->name('organization.all');
         Route::post('/', 'store')->name('organization.store');
         Route::get('/create', 'create')->name('organization.create');
-        // Route::patch('/edit/{id}', 'edit')->name('organization.edit');
-        // Route::delete('/delete/{id}', 'edit')->name('organization.destroy');
+        Route::get('/find/{id}', 'find')->name('organization.find');
+        Route::get('/edit/{id}', 'edit')->name('organization.edit');
+        Route::put('/update', 'update')->name('organization.update');
+        Route::delete('/delete/{id}', 'delete')->name('organization.destroy');
     })
     ->controller(GroupController::class)->prefix('admin/group')->group(function () {
         Route::get('/', 'index')->name('group.all');
         // Route::post('/', 'store')->name('group.store');
         // Route::get('/create', 'index')->name('group.create');
+        // Route::patch('/find/{id}', 'find')->name('group.find');
         // Route::patch('/edit/{id}', 'edit')->name('group.edit');
         // Route::delete('/delete/{id}', 'edit')->name('group.destroy');
     })

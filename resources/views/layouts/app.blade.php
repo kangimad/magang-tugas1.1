@@ -36,6 +36,13 @@
             {{ $slot }}
         </main>
     </div>
+    <script>
+
+        function delete(){
+            const btnDelete = document.getElementById('btnDelete')
+            alert('DELETE ?')
+        }
+    </script>
 </body>
 
 </html>
