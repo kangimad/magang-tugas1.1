@@ -10,9 +10,19 @@
     {{-- USER CONTENT --}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="relative bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="absolute top-5 left-4 px-3 py-1 bg-gray-200 rounded-l-full hover:bg-gray-300">
+                    <a href="{{ route('organization.all') }}">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="flex-row py-5 bg-white border-b">
+                    <div class="flex w-1/2 mx-auto justify-center">
+                        <p class="font-semibold text-lg">Create New Organization</p>
+                    </div>
+                </div>
 
-                <div class="flex-row mt-5 w-full px-5 py-4 bg-white rounded shadow">
+                <div class="flex-row mt-3 w-full px-5 py-4 bg-white rounded">
                     <form class="w-full" action="/admin/organization" method="post">
                         @csrf
                         {{-- CODE, NAME --}}
@@ -22,7 +32,7 @@
                                     Code
                                 </label>
                                 <input
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('code') ring-2 ring-red-600 @enderror"
+                                    class="appearance-none block w-full text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('code') ring-2 ring-red-600 @enderror"
                                     id="code" name="code" type="text" placeholder="code (4 digit)"
                                     value="{{ old('code') }}">
                                 @error('code')
@@ -35,7 +45,7 @@
                                     Username
                                 </label>
                                 <input
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('code') ring-2 ring-red-600 @enderror"
+                                    class="appearance-none block w-full text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('code') ring-2 ring-red-600 @enderror"
                                     id="created_by" name="created_by" type="text"
                                     placeholder="{{ Auth::user()->name }}" value="{{ Auth::user()->id }}">
                                 @error('created_by')
@@ -47,7 +57,7 @@
                                     Name
                                 </label>
                                 <input
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('name') ring-2 ring-red-600 @enderror"
+                                    class="appearance-none block w-full text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('name') ring-2 ring-red-600 @enderror"
                                     id="name" name="name" type="text" placeholder="name"
                                     value="{{ old('name') }}">
                                 @error('name')
@@ -63,11 +73,16 @@
                                 </label>
                                 <div class="relative">
                                     <select
-                                        class="block appearance-none w-full bg-gray-200 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('group_id') ring-2 ring-red-600 @enderror"
+                                        class="block appearance-none w-full border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('group_id') ring-2 ring-red-600 @enderror"
                                         id="group_id" name="group_id">
-                                        <option>Select one</option>
                                         @foreach ($groups as $group)
-                                            <option value="{{ $group->id }}" name="{{ $group->id }}">
+                                            @if (old('group_id' == $group->id))
+                                                <option value="{{ $group->id }}" selected>
+                                                    {{ $group->name }}
+                                                </option>
+                                            @else
+                                            @endif
+                                            <option value="{{ $group->id }}">
                                                 {{ $group->name }}
                                             </option>
                                         @endforeach
@@ -83,11 +98,16 @@
                                 </label>
                                 <div class="relative">
                                     <select
-                                        class="block appearance-none w-full bg-gray-200 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('type_id') ring-2 ring-red-600 @enderror"
+                                        class="block appearance-none w-full border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('type_id') ring-2 ring-red-600 @enderror"
                                         id="type_id" name="type_id">
-                                        <option aria-required="" placeholder="Select one">Select one</option>
                                         @foreach ($types as $type)
-                                            <option value="{{ $type->id }}" name="{{ $type->id }}">
+                                            @if (old('type_id' == $type->id))
+                                                <option value="{{ $type->id }}" selected>
+                                                    {{ $type->name }}
+                                                </option>
+                                            @else
+                                            @endif
+                                            <option value="{{ $type->id }}">
                                                 {{ $type->name }}
                                             </option>
                                         @endforeach
@@ -102,7 +122,7 @@
                                     Class
                                 </label>
                                 <input
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('class') ring-2 ring-red-600 @enderror"
+                                    class="appearance-none block w-full text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('class') ring-2 ring-red-600 @enderror"
                                     id="class" name="class" type="text" placeholder="class"
                                     value="{{ old('class') }}">
                                 @error('class')
@@ -117,7 +137,7 @@
                                     Address
                                 </label>
                                 <input
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('address') ring-2 ring-red-600 @enderror"
+                                    class="appearance-none block w-full text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('address') ring-2 ring-red-600 @enderror"
                                     id="address" name="address" type="text" placeholder="Address"
                                     value="{{ old('address') }}">
                                 @error('address')
@@ -129,7 +149,7 @@
                                     Phone
                                 </label>
                                 <input
-                                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('phone') ring-2 ring-red-600 @enderror"
+                                    class="appearance-none block w-full text-gray-700 border border-gray-400 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm @error('phone') ring-2 ring-red-600 @enderror"
                                     id="phone" name="phone" type="text" placeholder="Phone"
                                     value="{{ old('phone') }}">
                                 @error('phone')
@@ -146,11 +166,16 @@
                                 </label>
                                 <div class="relative">
                                     <select
-                                        class="block appearance-none w-full bg-gray-200 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm"
+                                        class="block appearance-none w-full border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm"
                                         id="province_id" name="province_id">
-                                        <option aria-required="" placeholder="Select one">Select one</option>
                                         @foreach ($provinces as $province)
-                                            <option value="{{ $province->id }}" name="{{ $province->id }}">
+                                            @if (old('province_id' == $province->id))
+                                                <option value="{{ $province->id }}" selected>
+                                                    {{ $province->name }}
+                                                </option>
+                                            @else
+                                            @endif
+                                            <option value="{{ $province->id }}">
                                                 {{ $province->name }}
                                             </option>
                                         @endforeach
@@ -164,11 +189,16 @@
                                 </label>
                                 <div class="relative">
                                     <select
-                                        class="block appearance-none w-full bg-gray-200 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm"
+                                        class="block appearance-none w-full border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm"
                                         id="regency_id" name="regency_id">
-                                        <option aria-required="" placeholder="Select one">Select one</option>
                                         @foreach ($regencies as $regency)
-                                            <option value="{{ $regency->id }}" name="{{ $regency->id }}">
+                                            @if (old('regency_id' == $regency->id))
+                                                <option value="{{ $regency->id }}" selected>
+                                                    {{ $regency->name }}
+                                                </option>
+                                            @else
+                                            @endif
+                                            <option value="{{ $regency->id }}">
                                                 {{ $regency->name }}
                                             </option>
                                         @endforeach
@@ -182,11 +212,16 @@
                                 </label>
                                 <div class="relative">
                                     <select
-                                        class="block appearance-none w-full bg-gray-200 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm"
+                                        class="block appearance-none w-full border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm"
                                         id="district_id" name="district_id">
-                                        <option aria-required="" placeholder="Select one">Select one</option>
                                         @foreach ($districts as $district)
-                                            <option value="{{ $district->id }}" name="{{ $district->id }}">
+                                            @if (old('district_id' == $district->id))
+                                                <option value="{{ $district->id }}" selected>
+                                                    {{ $district->name }}
+                                                </option>
+                                            @else
+                                            @endif
+                                            <option value="{{ $district->id }}">
                                                 {{ $district->name }}
                                             </option>
                                         @endforeach
@@ -200,11 +235,16 @@
                                 </label>
                                 <div class="relative">
                                     <select
-                                        class="block appearance-none w-full bg-gray-200 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm"
+                                        class="block appearance-none w-full border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 text-sm"
                                         id="village_id" name="village_id">
-                                        <option aria-required="" placeholder="Select one">Select one</option>
                                         @foreach ($villages as $village)
-                                            <option value="{{ $village->id }}" name="{{ $village->id }}">
+                                            @if (old('village_id' == $village->id))
+                                                <option value="{{ $village->id }}" selected>
+                                                    {{ $village->name }}
+                                                </option>
+                                            @else
+                                            @endif
+                                            <option value="{{ $village->id }}">
                                                 {{ $village->name }}
                                             </option>
                                         @endforeach

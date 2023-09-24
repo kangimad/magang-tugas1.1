@@ -39,7 +39,7 @@ Route::middleware('auth')
         Route::get('/find/{id}', 'find')->name('organization.find');
         Route::get('/edit/{id}', 'edit')->name('organization.edit');
         Route::put('/update', 'update')->name('organization.update');
-        Route::delete('/delete/{id}', 'delete')->name('organization.destroy');
+        Route::delete('/{id}/delete', 'destroy')->name('organization.destroy');
     })
     ->controller(GroupController::class)->prefix('admin/group')->group(function () {
         Route::get('/', 'index')->name('group.all');

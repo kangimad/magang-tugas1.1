@@ -11,6 +11,7 @@ use App\Models\Regency;
 use App\Models\District;
 use App\Models\Village;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class OrganizationController extends Controller
 {
@@ -73,9 +74,12 @@ class OrganizationController extends Controller
             'created_by' => 'required',
         ]);
 
+        $validatedData['created_by'] = auth()->user()->id;
+
+
         Organization::create($validatedData);
 
-        return redirect()->route('organization.all')->with('succcess', 'Data berhasil ditambahkan');
+        return redirect()->route('organization.all')->with('create-success', 'Data berhasil ditambahkan');
     }
 
     public function find($id)
@@ -94,6 +98,12 @@ class OrganizationController extends Controller
             'app' => 'Health Services',
             'title' => 'Organizations',
             'page' => 'edit-organizations',
+            'groups' => Group::all(),
+            'types' => Type::all(),
+            'provinces' => Province::all(),
+            'regencies' => Regency::all(),
+            'districts' => District::all(),
+            'villages' => Village::all(),
             'organizations' => Organization::with(['group', 'type', 'province', 'regency', 'district', 'village', 'user'])->find($id)
         ]);
     }
@@ -103,6 +113,7 @@ class OrganizationController extends Controller
         // dd('penambahan data berhasil', request()->all());
 
         $rule = $request->validate([
+            'code' => 'required|max:4',
             'name' => 'required|max:255',
             'group_id' => 'required',
             'type_id' => 'required',
@@ -115,19 +126,21 @@ class OrganizationController extends Controller
             'village_id' => 'required',
         ]);
 
+        $rule['created_by'] = auth()->user()->id;
+
         Organization::where('id', $organization->id)
                     ->update($rule);
 
-        return redirect()->route('organization.find')->with('succcess', 'Data berhasil diperbarui');
+        return redirect()->route('organization.find')->with('edit-success', 'Data berhasil diperbarui');
     }
 
-    public function delete($id)
+    public function destroy(Request $request)
     {
-        // dd('penambahan data berhasil', request()->all());
+        // dd('penambahan data berhasil', $request->all());
 
-        Organization::delete($id);
+        Organization::destroy($request->id);
 
-        return redirect()->route('organization.all')->with('deleted', 'Data berhasil dihapus');
+        return redirect()->route('organization.all')->with('delete-success', 'Data berhasil dihapus');
     }
 
 }

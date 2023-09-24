@@ -8,51 +8,88 @@
 
     {{-- USER CONTENT --}}
     <div class="py-12">
+        @if (session('edit-success'))
+            <div
+                class="w-1/2 p-3 mb-7 mx-auto font-semibold text-center text-white text-sm bg-teal-700 rounded-lg shadow">
+                <p>{{ session('edit-success') }}</p>
+            </div>
+        @endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-
-                <div class="flex-row  px-5 py-4 bg-white rounded shadow">
-                    <div class="mt-5 bg-white rounded">
-                        @if (session('success'))
-                            <div
-                                class=" w-1/2 mx-auto p-2 mb-4 font-semibold text-center text-white text-sm bg-teal-700 rounded-lg ">
-                                <p>{{ session('success') }}</p>
-                            </div>
-                        @endif
+            <div class="relative bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="absolute top-4 left-4 px-3 py-1 bg-gray-200 rounded-l-full hover:bg-gray-300">
+                    <a href="{{ route('organization.all') }}">
+                        <i class="bi bi-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="flex-row py-4 bg-white border-b">
+                    <div class="flex w-1/2 mx-auto justify-center">
+                        <p class="font-semibold text-lg">{{ $organizations->name }}</p>
                     </div>
                 </div>
-                <div class="flex-row  px-5 py-4 bg-white rounded shadow">
-                    <div class="mt-5 bg-white rounded">
+                <div class="flex-row py-4 bg-white border-b">
+                    <div class="flex w-1/2 mx-auto justify-evenly">
                         <div>
-                            <ul>
-                                <li>Code : {{ $organizations->code }}</li>
-                                <li>Name : {{ $organizations->name }}</li>
-                                <li>Group : {{ $organizations->group->name }}</li>
-                                <li>Type : {{ $organizations->type->name }}</li>
-                                <li>Class : {{ $organizations->class }}</li>
-                                <li>Address : {{ $organizations->address }}</li>
-                                <li>Phone : {{ $organizations->phone }}</li>
-                                <li>Province : {{ $organizations->province->name }}</li>
-                                <li>Regency : {{ $organizations->regency->name }}</li>
-                                <li>District : {{ $organizations->district->name }}</li>
-                                <li>Village : {{ $organizations->village->name }}</li>
-                                <li>Created Date : {{ $organizations->created_at }}</li>
-                                <li>Updated Date : {{ $organizations->updated_at }}</li>
-                                <li>Creator : {{ $organizations->user->name }}</li>
-                            </ul>
+                            <p>Code</p>
+                            <p>Name</p>
+                            <p>Group</p>
+                            <p>Type</p>
+                            <p>Class</p>
+                            <p>Addres</p>
+                            <p>Phone</p>
+                            <p>Province</p>
+                            <p>Regency</p>
+                            <p>District</p>
+                            <p>Village</p>
+                            <p>Date Created</p>
+                            <p>Date Updated</p>
+                            <p>Created By</p>
                         </div>
                         <div>
-                            <a href="/admin/organization/edit/{{ $organizations->id }}"
-                                class="px-3 py-1 mx-1 bg-yellow-400 rounded hover:bg-yellow-600">
-                                <i class="bi bi-pencil"></i></a>
-                            <a href="/admin/organization/delete/{{ $organizations->id }}"
-                                class="px-3 py-1 mx-1 bg-red-400 rounded hover:bg-red-600">
-                                <i class="bi bi-trash"></i></a>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                            <p>:</p>
+                        </div>
+                        <div>
+                            <p>{{ $organizations->code }}</p>
+                            <p>{{ $organizations->name }}</p>
+                            <p>{{ $organizations->group->name }}</p>
+                            <p>{{ $organizations->type->name }}</p>
+                            <p>{{ $organizations->class }}</p>
+                            <p>{{ $organizations->address }}</p>
+                            <p>{{ $organizations->phone }}</p>
+                            <p>{{ $organizations->province->name }}</p>
+                            <p>{{ $organizations->regency->name }}</p>
+                            <p>{{ $organizations->district->name }}</p>
+                            <p>{{ $organizations->village->name }}</p>
+                            <p>{{ $organizations->created_at }}</p>
+                            <p>{{ $organizations->updated_at }}</p>
+                            <p>{{ $organizations->user->name }}</p>
                         </div>
                     </div>
+                </div>
+                <div class="flex w-1/2 mx-auto justify-center py-4">
+                    <a href="/admin/organization/edit/{{ $organizations->id }}"
+                        class="px-3 py-1 mx-1 bg-yellow-400 rounded hover:bg-yellow-600">
+                        <i class="bi bi-pencil"></i></a>
+                    <a href="/admin/organization/delete/{{ $organizations->id }}"
+                        class="px-3 py-1 mx-1 bg-red-400 rounded hover:bg-red-600">
+                        <i class="bi bi-trash"></i></a>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     {{-- USER CONTENT --}}
 

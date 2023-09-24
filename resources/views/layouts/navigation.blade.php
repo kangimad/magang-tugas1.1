@@ -18,26 +18,19 @@
                 </div>
                 <!-- Navigation Links Organizations -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('organization.all')" :active="request()->routeIs('organization.all') ||
-                        request()->routeIs('organization.create') ||
-                        request()->routeIs('organization.find') ||
-                        request()->routeIs('organization.edit')">
+                    <x-nav-link :href="route('organization.all')" :active="request()->routeIs('organization.*')">
                         {{ __('Organizations') }}
                     </x-nav-link>
                 </div>
                 <!-- Navigation Links Groups -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('group.all')" :active="request()->routeIs('group.all') ||
-                        request()->routeIs('group.create') ||
-                        request()->routeIs('group.edit')">
+                    <x-nav-link :href="route('group.all')" :active="request()->routeIs('group.*')">
                         {{ __('Groups') }}
                     </x-nav-link>
                 </div>
                 <!-- Navigation Links Types -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('type.all')" :active="request()->routeIs('type.all') ||
-                        request()->routeIs('type.create') ||
-                        request()->routeIs('type.edit')">
+                    <x-nav-link :href="route('type.all')" :active="request()->routeIs('type.*')">
                         {{ __('Types') }}
                     </x-nav-link>
                 </div>
@@ -100,8 +93,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('group.all')" :active="request()->routeIs('group.*')">
+                {{ __('Group') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('type.all')" :active="request()->routeIs('type.*')">
+                {{ __('Type') }}
             </x-responsive-nav-link>
         </div>
 

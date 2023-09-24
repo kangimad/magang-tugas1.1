@@ -8,29 +8,29 @@
 
     {{-- USER CONTENT --}}
     <div class="py-12">
+        @if (session('create-success'))
+            <div class="w-1/2 p-3 mb-7 mx-auto font-semibold text-center text-white text-sm bg-teal-400 rounded-lg ">
+                <p>{{ session('create-success') }}</p>
+            </div>
+        @endif
+        @if (session('delete-success'))
+            <div class="w-1/2 p-3 mb-7 mx-auto font-semibold text-center text-white text-sm bg-pink-400 rounded-lg ">
+                <p>{{ session('delete-success') }}</p>
+            </div>
+        @endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-
                 <div class="flex-row  px-5 py-4 bg-white rounded shadow">
-                    <div class="mt-5 bg-white rounded">
-                        @if (session('success'))
-                            <div
-                                class=" w-1/2 mx-auto p-2 mb-4 font-semibold text-center text-white text-sm bg-teal-700 rounded-lg ">
-                                <p>{{ session('success') }}</p>
-                            </div>
-                        @endif
-                    </div>
+
                     <div class="mt-5 bg-white rounded">
                         <div class="flex justify-between items-center pb-5 border-b-2 border-gray-300">
                             <p class="block text-xl font-medium">Filters</p>
-                            @auth
-                                <p class="ml-auto">
-                                    <a href="/admin/organization/create"
-                                        class="px-2 py-1 font-medium text-gray-300 bg-teal-600 hover:text-white hover:bg-teal-700 rounded">
-                                        <i class="bi bi-plus-square text-md"></i>
-                                    </a>
-                                </p>
-                            @endauth
+                            <p class="ml-auto">
+                                <a href="{{ route('organization.create') }}"
+                                    class="px-2 py-1 font-medium text-gray-300 bg-teal-600 hover:text-white hover:bg-teal-700 rounded">
+                                    <i class="bi bi-plus-square text-md"></i>
+                                </a>
+                            </p>
                         </div>
 
                         <div class="py-5 px-4 border-b">
@@ -107,11 +107,21 @@
                                         <td class="px-3 py-1">{{ $org->phone }}</td>
                                         <td class="px-3 py-1 flex align-middle justify-center">
                                             <a href="/admin/organization/find/{{ $org->id }}"
-                                                class="px-3 py-1 mx-1 bg-yellow-400 rounded hover:bg-yellow-600">
+                                                class="px-3 py-1 mx-1 bg-yellow-400 rounded hover:bg-yellow-600 hover:text-white">
                                                 <i class="bi bi-display"></i></a>
-                                            <a href="/admin/organization/delete/{{ $org->id }}" id="btn-delete" onclick="delete()"
-                                                class="px-3 py-1 mx-1 bg-red-400 rounded hover:bg-red-600">
-                                                <i class="bi bi-trash"></i></a>
+                                            <a href="/admin/organization/edit/{{ $org->id }}"
+                                                class="px-3 py-1 mx-1 bg-blue-400 rounded hover:bg-blue-600 hover:text-white">
+                                                <i class="bi bi-pencil"></i></a>
+                                            <form action="/admin/organization/{{ $org->id }}/delete" method="post"
+                                                class="inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button
+                                                    class="px-3 py-1 mx-1 bg-red-400 rounded hover:bg-red-600 outline-none hover:text-white"
+                                                    onclick="return confirm('Are you sure ?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
