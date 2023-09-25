@@ -10,8 +10,6 @@ use App\Models\Province;
 use App\Models\Regency;
 use App\Models\District;
 use App\Models\Village;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class OrganizationController extends Controller
 {
@@ -28,6 +26,7 @@ class OrganizationController extends Controller
             ->when($request->type_id, function ($query) use ($request) {
                 return $query->where('type_id', 'like', '%' . $request->type_id . '%');
             });
+
         return view('organization.index', [
             'app' => 'Health Services',
             'title' => 'Organizations',
@@ -51,7 +50,6 @@ class OrganizationController extends Controller
             'regencies' => Regency::all(),
             'districts' => District::all(),
             'villages' => Village::all(),
-            'users' => User::all()
         ]);
     }
 
@@ -75,7 +73,6 @@ class OrganizationController extends Controller
         ]);
 
         $validatedData['created_by'] = auth()->user()->id;
-
 
         Organization::create($validatedData);
 

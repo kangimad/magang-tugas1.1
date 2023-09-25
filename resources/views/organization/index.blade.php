@@ -28,13 +28,13 @@
                             <p class="ml-auto">
                                 <a href="{{ route('organization.create') }}"
                                     class="px-2 py-1 font-medium text-gray-300 bg-teal-600 hover:text-white hover:bg-teal-700 rounded">
-                                    <i class="bi bi-plus-square text-md"></i>
+                                    <i class="bi bi-plus-square text-md"></i> Create
                                 </a>
                             </p>
                         </div>
 
                         <div class="py-5 px-4 border-b">
-                            <form action="/user/organizations" method="get" class="w-full">
+                            <form action="{{ route('organization.all') }}" method="get" class="w-full">
                                 <div>
                                     <input type="text" name="name" id="name" placeholder="Name"
                                         value="{{ request('name') }}"
