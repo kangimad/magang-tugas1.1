@@ -82,17 +82,17 @@ class OrganizationController extends Controller
         return redirect()->route('organization.all')->with('create-success', 'Data berhasil ditambahkan');
     }
 
-    public function find($id)
+    public function find(Request $request)
     {
         return view('organization.find', [
             'app' => 'Health Services',
             'title' => 'Organizations',
             'page' => 'detail-organizations',
-            'organizations' => Organization::with(['group', 'type', 'province', 'regency', 'district', 'village', 'user'])->find($id)
+            'organizations' => Organization::with(['group', 'type', 'province', 'regency', 'district', 'village', 'user'])->find($request->id)
         ]);
     }
 
-    public function edit($id)
+    public function edit(Request $request, Organization $organization)
     {
         return view('organization.edit', [
             'app' => 'Health Services',
@@ -104,15 +104,16 @@ class OrganizationController extends Controller
             'regencies' => Regency::all(),
             'districts' => District::all(),
             'villages' => Village::all(),
-            'organizations' => Organization::with(['group', 'type', 'province', 'regency', 'district', 'village', 'user'])->find($id)
+            'organizations' => $organization->with(['group', 'type', 'province', 'regency', 'district', 'village', 'user'])->find($request->id)
         ]);
     }
 
-    public function update(Request $request, Organization $organization)
+    public function update(Request $request, $id)
     {
-        // dd('penambahan data berhasil', request()->all());
 
-        $rule = $request->validate([
+        // dd($request->all());
+
+        $rules = [
             'code' => 'required|max:4',
             'name' => 'required|max:255',
             'group_id' => 'required',
@@ -123,15 +124,29 @@ class OrganizationController extends Controller
             'province_id' => 'required',
             'regency_id' => 'required',
             'district_id' => 'required',
-            'village_id' => 'required',
-        ]);
+        ];
 
-        $rule['created_by'] = auth()->user()->id;
+        $data = $request->validate($rules);
 
-        Organization::where('id', $organization->id)
-                    ->update($rule);
+        $data = [
+            'code' => $request->input('code'),
+            'name' => $request->input('name'),
+            'group_id' => $request->input('group_id'),
+            'type_id' => $request->input('type_id'),
+            'class' => $request->input('class'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'province_id' => $request->input('province_id'),
+            'regency_id' => $request->input('regency_id'),
+            'district_id' => $request->input('district_id'),
+            'village_id' => $request->input('village_id'),
+            'created_by' => auth()->user()->id
+        ];
 
-        return redirect()->route('organization.find')->with('edit-success', 'Data berhasil diperbarui');
+        Organization::where('id', $id)
+            ->update($data);
+
+        return redirect()->route('organization.find', [$id])->with('edit-success', 'Data berhasil diperbarui');
     }
 
     public function destroy(Request $request)
@@ -142,5 +157,4 @@ class OrganizationController extends Controller
 
         return redirect()->route('organization.all')->with('delete-success', 'Data berhasil dihapus');
     }
-
 }

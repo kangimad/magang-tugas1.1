@@ -106,10 +106,10 @@
                                         <td class="px-3 py-1">{{ $org->address }}</td>
                                         <td class="px-3 py-1">{{ $org->phone }}</td>
                                         <td class="px-3 py-1 flex align-middle justify-center">
-                                            <a href="/admin/organization/find/{{ $org->id }}"
+                                            <a href="/admin/organization/{{ $org->id }}/find"
                                                 class="px-3 py-1 mx-1 bg-yellow-400 rounded hover:bg-yellow-600 hover:text-white">
                                                 <i class="bi bi-display"></i></a>
-                                            <a href="/admin/organization/edit/{{ $org->id }}"
+                                            <a href="/admin/organization/{{ $org->id }}/edit"
                                                 class="px-3 py-1 mx-1 bg-blue-400 rounded hover:bg-blue-600 hover:text-white">
                                                 <i class="bi bi-pencil"></i></a>
                                             <form action="/admin/organization/{{ $org->id }}/delete" method="post"

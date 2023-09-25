@@ -79,12 +79,17 @@
                     </div>
                 </div>
                 <div class="flex w-1/2 mx-auto justify-center py-4">
-                    <a href="/admin/organization/edit/{{ $organizations->id }}"
-                        class="px-3 py-1 mx-1 bg-yellow-400 rounded hover:bg-yellow-600">
+                    <a href="/admin/organization/{{ $organizations->id }}/edit"
+                        class="px-3 py-1 mx-1 bg-blue-400 rounded hover:bg-blue-600 hover:text-white">
                         <i class="bi bi-pencil"></i></a>
-                    <a href="/admin/organization/delete/{{ $organizations->id }}"
-                        class="px-3 py-1 mx-1 bg-red-400 rounded hover:bg-red-600">
-                        <i class="bi bi-trash"></i></a>
+                    <form action="/admin/organization/{{ $organizations->id }}/delete" method="post" class="inline">
+                        @csrf
+                        @method('delete')
+                        <button class="px-3 py-1 mx-1 bg-red-400 rounded hover:bg-red-600 outline-none hover:text-white"
+                            onclick="return confirm('Are you sure ?')">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

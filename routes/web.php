@@ -36,9 +36,9 @@ Route::middleware('auth')
         Route::get('/', 'index')->name('organization.all');
         Route::post('/', 'store')->name('organization.store');
         Route::get('/create', 'create')->name('organization.create');
-        Route::get('/find/{id}', 'find')->name('organization.find');
-        Route::get('/edit/{id}', 'edit')->name('organization.edit');
-        Route::put('/update', 'update')->name('organization.update');
+        Route::get('/{id}/find', 'find')->name('organization.find');
+        Route::get('/{id}/edit', 'edit')->name('organization.edit');
+        Route::put('/{id}/update', 'update')->name('organization.update');
         Route::delete('/{id}/delete', 'destroy')->name('organization.destroy');
     })
     ->controller(GroupController::class)->prefix('admin/group')->group(function () {
