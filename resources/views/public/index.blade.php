@@ -1,7 +1,6 @@
 {{-- @dd($organizations); --}}
 <x-guest-layout>
 
-
     <div class="w-full mt-7">
         <h1 class="text-center text-3xl font-medium ">ORGANIZATIONS</h1>
     </div>

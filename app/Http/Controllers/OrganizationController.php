@@ -55,7 +55,7 @@ class OrganizationController extends Controller
 
     public function store(Request $request)
     {
-        // dd('penambahan data berhasil', request()->all());
+        // dd('penambahan Organization berhasil', request()->all());
 
         $validatedData = $request->validate([
             'code' => 'required|unique:organizations|max:4',
@@ -76,7 +76,7 @@ class OrganizationController extends Controller
 
         Organization::create($validatedData);
 
-        return redirect()->route('organization.all')->with('create-success', 'Data berhasil ditambahkan');
+        return redirect()->route('organization.all')->with('create-success', 'Organization berhasil ditambahkan');
     }
 
     public function find(Request $request)
@@ -143,15 +143,15 @@ class OrganizationController extends Controller
         Organization::where('id', $id)
             ->update($data);
 
-        return redirect()->route('organization.find', [$id])->with('edit-success', 'Data berhasil diperbarui');
+        return redirect()->route('organization.find', [$id])->with('edit-success', 'Organization berhasil diperbarui');
     }
 
     public function destroy(Request $request)
     {
-        // dd('penambahan data berhasil', $request->all());
+        // dd('penambahan Organization berhasil', $request->all());
 
         Organization::destroy($request->id);
 
-        return redirect()->route('organization.all')->with('delete-success', 'Data berhasil dihapus');
+        return redirect()->route('organization.all')->with('delete-success', 'Organization berhasil dihapus');
     }
 }

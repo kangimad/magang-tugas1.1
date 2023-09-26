@@ -43,18 +43,21 @@ Route::middleware('auth')
     })
     ->controller(GroupController::class)->prefix('admin/group')->group(function () {
         Route::get('/', 'index')->name('group.all');
-        // Route::post('/', 'store')->name('group.store');
-        // Route::get('/create', 'index')->name('group.create');
-        // Route::patch('/find/{id}', 'find')->name('group.find');
-        // Route::patch('/edit/{id}', 'edit')->name('group.edit');
-        // Route::delete('/delete/{id}', 'edit')->name('group.destroy');
+        Route::post('/', 'store')->name('group.store');
+        Route::get('/create', 'create')->name('group.create');
+        Route::get('/{id}/find', 'find')->name('group.find');
+        Route::get('/{id}/edit', 'edit')->name('group.edit');
+        Route::put('/{id}/update', 'update')->name('group.update');
+        Route::delete('/{id}/delete', 'destroy')->name('group.destroy');
     })
     ->controller(TypeController::class)->prefix('admin/type')->group(function () {
         Route::get('/', 'index')->name('type.all');
-        // Route::post('/', 'store')->name('type.store');
-        // Route::get('/create', 'index')->name('type.create');
-        // Route::patch('/edit/{id}', 'edit')->name('type.edit');
-        // Route::delete('/delete/{id}', 'edit')->name('type.destroy');
+        Route::post('/', 'store')->name('type.store');
+        Route::get('/create', 'create')->name('type.create');
+        Route::get('/{id}/find', 'find')->name('type.find');
+        Route::get('/{id}/edit', 'edit')->name('type.edit');
+        Route::put('/{id}/update', 'update')->name('type.update');
+        Route::delete('/{id}/delete', 'destroy')->name('type.destroy');
     });
 
 require __DIR__ . '/auth.php';
