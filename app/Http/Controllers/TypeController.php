@@ -13,7 +13,7 @@ class TypeController extends Controller
             'app' => 'Health Services',
             'title' => 'types',
             'page' => 'types',
-            'types' => Type::all(),
+            'types' => Type::orderBy('name', 'asc')->get(),
         ]);
     }
 

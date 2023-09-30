@@ -13,7 +13,7 @@ class GroupController extends Controller
             'app' => 'Health Services',
             'title' => 'Groups',
             'page' => 'groups',
-            'groups' => Group::all(),
+            'groups' => Group::orderBy('name', 'asc')->get(),
         ]);
     }
 

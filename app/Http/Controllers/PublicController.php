@@ -23,14 +23,14 @@ class PublicController extends Controller
             ->when($request->type_id, function ($query) use ($request) {
                 return $query->where('type_id', 'like', '%' . $request->type_id . '%');
             })
-            ;
+            ->orderBy('name', 'asc')->paginate(15);
         return view('public.index', [
             'app' => 'Health Services',
             'title' => 'Organizations',
             'page' => 'organizations',
             'groups' => Group::all(),
             'types' => Type::all(),
-            'organizations' => $organizations->paginate(15)
+            'organizations' => $organizations
         ]);
     }
 }

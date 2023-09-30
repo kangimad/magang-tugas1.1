@@ -25,7 +25,8 @@ class OrganizationController extends Controller
             })
             ->when($request->type_id, function ($query) use ($request) {
                 return $query->where('type_id', 'like', '%' . $request->type_id . '%');
-            });
+            })
+            ->orderBy('name', 'asc')->paginate(15);
 
         return view('organization.index', [
             'app' => 'Health Services',
@@ -33,7 +34,7 @@ class OrganizationController extends Controller
             'page' => 'organizations',
             'groups' => Group::all(),
             'types' => Type::all(),
-            'organizations' => $organizations->paginate(15)
+            'organizations' => $organizations
         ]);
     }
 
