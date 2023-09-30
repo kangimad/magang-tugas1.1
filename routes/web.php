@@ -8,6 +8,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\OrganizationExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,11 @@ Route::middleware('auth')
         Route::get('/{id}/edit', 'edit')->name('organization.edit');
         Route::put('/{id}/update', 'update')->name('organization.update');
         Route::delete('/{id}/delete', 'destroy')->name('organization.destroy');
+    })
+    ->controller(OrganizationExportController::class)->prefix('admin/organization')->group(function () {
+        Route::get('/export/excel', 'exportExcel')->name('organization.export-excel');
+        Route::get('/view/pdf', 'viewPDF')->name('organization.view-pdf');
+        Route::get('/export/pdf', 'exportPDF')->name('organization.export-pdf');
     })
     ->controller(GroupController::class)->prefix('admin/group')->group(function () {
         Route::get('/', 'index')->name('group.all');

@@ -68,16 +68,25 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="flex justify-between  mt-5">
-                                    <div>
-                                        <a href="{{ route('organization.export-excel') }}"
-                                            class="w-fit px-3 py-1 rounded-lg bg-indigo-500 hover:rounded-r-lg hover:bg-indigo-600 outline-none text-gray-300 text-md font-medium">
-                                            <i class="bi bi-download"></i> Download Excel
-                                        </a>
+                                <div class="flex justify-between align-middle mt-5">
+                                    <div class="flex gap-x-3 my-auto">
+                                        <div>
+                                            <a href="{{ route('organization.export-pdf') }}"
+                                                class="w-fit px-3 py-1 rounded-lg bg-red-500 hover:rounded-r-lg hover:bg-red-600 outline-none text-gray-200 text-md font-medium"
+                                                target="_blank">
+                                                <i class="bi bi-download"></i> Download PDF
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href="{{ route('organization.export-excel') }}"
+                                                class="w-fit px-3 py-1 rounded-lg bg-indigo-500 hover:rounded-r-lg hover:bg-indigo-600 outline-none text-gray-200 text-md font-medium">
+                                                <i class="bi bi-download"></i> Download Excel
+                                            </a>
+                                        </div>
                                     </div>
                                     <div>
                                         <button type="submit"
-                                            class="w-fit px-3 py-1 rounded-lg bg-teal-500 hover:rounded-r-lg hover:bg-teal-600 outline-none text-gray-300 text-md font-medium">
+                                            class="w-fit px-3 py-1 rounded-lg bg-teal-500 hover:rounded-r-lg hover:bg-teal-600 outline-none text-gray-200 text-md font-medium">
                                             <i class="bi bi-search"></i> Search
                                         </button>
                                     </div>

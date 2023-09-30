@@ -158,9 +158,4 @@ class OrganizationController extends Controller
 
         return redirect()->route('organization.all')->with('delete-success', 'Organization berhasil dihapus');
     }
-
-    public function exportExcel ()
-    {
-        return Excel::download(new OrganizationExport, "Organizations.xlsx");
-    }
 }

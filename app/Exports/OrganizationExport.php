@@ -8,9 +8,6 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class OrganizationExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     public function view():View
     {
         $organizations = Organization::orderBy('name', 'asc')->get();
