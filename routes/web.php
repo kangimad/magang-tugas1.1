@@ -34,6 +34,7 @@ Route::middleware('auth')
     })
     ->controller(OrganizationController::class)->prefix('admin/organization')->group(function () {
         Route::get('/', 'index')->name('organization.all');
+        Route::get('/export-excel', 'exportExcel')->name('organization.export-excel');
         Route::post('/', 'store')->name('organization.store');
         Route::get('/create', 'create')->name('organization.create');
         Route::get('/{id}/find', 'find')->name('organization.find');

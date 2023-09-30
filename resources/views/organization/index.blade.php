@@ -68,11 +68,19 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="flex justify-end mt-5">
-                                    <button type="submit"
-                                        class="w-fit px-3 py-1 rounded-lg bg-teal-500 hover:rounded-r-lg hover:bg-teal-600 outline-none text-gray-300 text-md font-medium">
-                                        <i class="bi bi-search"></i> Search
-                                    </button>
+                                <div class="flex justify-between  mt-5">
+                                    <div>
+                                        <a href="{{ route('organization.export-excel') }}"
+                                            class="w-fit px-3 py-1 rounded-lg bg-indigo-500 hover:rounded-r-lg hover:bg-indigo-600 outline-none text-gray-300 text-md font-medium">
+                                            <i class="bi bi-download"></i> Download Excel
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <button type="submit"
+                                            class="w-fit px-3 py-1 rounded-lg bg-teal-500 hover:rounded-r-lg hover:bg-teal-600 outline-none text-gray-300 text-md font-medium">
+                                            <i class="bi bi-search"></i> Search
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -112,8 +120,8 @@
                                             <a href="/admin/organization/{{ $org->id }}/edit"
                                                 class="px-3 py-1 mx-1 bg-blue-400 rounded hover:bg-blue-600 hover:text-white">
                                                 <i class="bi bi-pencil"></i></a>
-                                            <form action="/admin/organization/{{ $org->id }}/delete" method="post"
-                                                class="inline">
+                                            <form action="/admin/organization/{{ $org->id }}/delete"
+                                                method="post" class="inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button

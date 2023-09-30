@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrganizationExport;
 use Illuminate\Http\Request;
 use App\Models\Organization;
 use App\Models\Type;
@@ -10,6 +11,8 @@ use App\Models\Province;
 use App\Models\Regency;
 use App\Models\District;
 use App\Models\Village;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Expr\FuncCall;
 
 class OrganizationController extends Controller
 {
@@ -154,5 +157,10 @@ class OrganizationController extends Controller
         Organization::destroy($request->id);
 
         return redirect()->route('organization.all')->with('delete-success', 'Organization berhasil dihapus');
+    }
+
+    public function exportExcel ()
+    {
+        return Excel::download(new OrganizationExport, "Organizations.xlsx");
     }
 }
