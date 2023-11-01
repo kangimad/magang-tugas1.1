@@ -19,7 +19,7 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex justify-end px-5">
-        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+        <x-nav-link :href="route('login.user')" :active="request()->routeIs('login.user')">
             {{ __('Login') }}
         </x-nav-link>
     </div>

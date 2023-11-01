@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\ApiOrganizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\Api\Auth\ApiAuthController;
+use App\Http\Controllers\Api\ApiOrganizationController;
+use App\Http\Controllers\Api\Auth\ApiRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/', function(){
+    return response()->json([
+        'status' => false,
+        'message'=> 'Akses ditolak'
+    ]);
+})->name('login');
+
 Route::apiResources([
-    'organizations' => ApiOrganizationController::class,
-    // 'types' => ApiTypeController::class,
-    // 'groups' => ApiGroupController::class
+    'register' => ApiRegisterController::class,
+    'login' => ApiAuthController::class,
 ]);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResources([
+        'organizations' => ApiOrganizationController::class,
+    ]);
+});

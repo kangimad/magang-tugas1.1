@@ -14,7 +14,7 @@ class ApiOrganizationController extends Controller
      */
     public function index()
     {
-        $data = Organization::latest()->get();
+        $data = Organization::latest()->paginate(10);
         return response()->json([
             'status' => true,
             'message' => "Data berhasil diperoleh",
@@ -110,7 +110,7 @@ class ApiOrganizationController extends Controller
         };
 
         $rules = [
-            'code' => 'required|unique:organizations|max:4',
+            'code' => 'required|max:4',
             'name' => 'required|max:255',
             'group_id' => 'required',
             'type_id' => 'required',
@@ -124,14 +124,9 @@ class ApiOrganizationController extends Controller
             'created_by' => 'required',
         ];
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => "Gagal menambahkan data",
-                "data" => $validator->errors()
-            ], 400);
-        };
+        if($request->input('code') != $data->code){
+            $rules['code'] = 'required|unique:organizations|max:4';
+        }
 
         $data = [
             'code' => $request->input('code'),
@@ -147,6 +142,15 @@ class ApiOrganizationController extends Controller
             'village_id' => $request->input('village_id'),
             'created_by' => $request->input('created_by')
         ];
+
+        $validator = Validator::make($data, $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => "Gagal menambahkan data",
+                "data" => $validator->errors()
+            ], 400);
+        };
 
         Organization::where('id', $id)
             ->update($data);
