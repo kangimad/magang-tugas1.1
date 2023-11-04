@@ -33,8 +33,12 @@ Route::apiResources([
     'login' => ApiAuthController::class,
 ]);
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::apiResources([
-        'organizations' => ApiOrganizationController::class,
-    ]);
-});
+// Route::middleware(['auth:sanctum'])->group(function () {
+//     Route::apiResources([
+//         'organizations' => ApiOrganizationController::class,
+//     ]);
+// });
+
+Route::apiResources([
+    'organizations' => ApiOrganizationController::class,
+]);
